@@ -2,14 +2,13 @@
 
 {% block content %}
 
-    
-    <div>pokemans go here: </div>
+    <h2>Enter Pokémon name (all lowercase).</h2>
     <form class="container" method="POST">
         {{ form.hidden_tag() }}
 
-        {{ form.poke_name(class='form-control', placeholder='pokemon name', autocomplete='off') }}
+        {{ form.poke_name(class='form-control', placeholder='Pokémon', autocomplete='off') }}
         {{ form.submit(class='btn btn-danger') }}
     </form>
-    <a href="/">nah i don't like pokemon i wanna go back</a>
+    <a href="/">Go back.</a>
 
 {% endblock %}
