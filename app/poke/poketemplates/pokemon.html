@@ -9,9 +9,6 @@
         {{ form.poke_name(class='form-control', placeholder='Pokémon', autocomplete='off') }}
         {{ form.submit(class='btn btn-danger') }}
     </form>
-    <a href="/">Go back.</a>
-    </br>
-    <a href="/save_poke">Go to your Pokémon Party.</a>
 
     {% if pokemon %}
 
@@ -23,7 +20,7 @@
             <li>HP: {{ pokemon.hp }}</li>
             <li>ATK: {{ pokemon.attack }}</li>
             <li>DEF: {{ pokemon.defense }}</li>
-            <li method="POST" action="/save_poke">{{ form.save(class="btn btn-light") }}</li>
+            <li class="redsubmit" method="POST" action="/save_poke">{{ form.save(class="btn btn-light") }}</li>
         </div>
       </div>
 

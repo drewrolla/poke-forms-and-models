@@ -4,12 +4,21 @@ body {
 }
 
 div {
-    padding-top: 200px;
     margin: auto;
     text-align: center;
   }
 
+.navbar {
+  padding: none;
+  color: white;
+}
+
+h1{
+  padding-top: 200px;
+}
+
 h2 {
+    padding-top: 170px;
     color: gray;
 }
 
