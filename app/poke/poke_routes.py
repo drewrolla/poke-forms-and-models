@@ -7,10 +7,6 @@ from app.models import Poke
 poke = Blueprint('poke', __name__, template_folder='poketemplates')
 
 
-@poke.route('/pokeinfo')
-def getPokeInfo():
-    return render_template('pokeinfo.html')
-
 @poke.route('/pokemon', methods=["GET", "POST"])
 def getPokemon():
     form = PokemonSearchForm()

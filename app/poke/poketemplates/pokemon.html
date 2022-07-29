@@ -10,21 +10,20 @@
         {{ form.submit(class='btn btn-danger') }}
     </form>
     <a href="/">Go back.</a>
+    </br>
+    <a href="/save_poke">Go to your Pokémon Party.</a>
 
     {% if pokemon %}
 
     <div class="card" style="width: 18rem;">
         <img src="{{ pokemon.img_url }}" class="card-img-top" alt="...">
         <div class="card-body">
-          <h5 class="card-title">{{ pokemon.name }}</h5>
-          <p class="card-text">
-            <p>Ability: {{ pokemon.ability }}</p>
-            <ul>
-                <li>HP: {{ pokemon.hp }}</li>
-                <li>ATK: {{ pokemon.attack }}</li>
-                <li>DEF: {{ pokemon.defense }}</li>
-            </ul>
-            </p>
+          <h5 class="card-title">{{ pokemon.name.title() }}</h5>
+            <strong>Ability: {{ pokemon.ability }}</strong>
+            <li>HP: {{ pokemon.hp }}</li>
+            <li>ATK: {{ pokemon.attack }}</li>
+            <li>DEF: {{ pokemon.defense }}</li>
+            <li method="POST" action="/save_poke">{{ form.save(class="btn btn-light") }}</li>
         </div>
       </div>
 

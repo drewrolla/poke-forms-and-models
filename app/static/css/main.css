@@ -13,6 +13,9 @@ h2 {
     color: gray;
 }
 
+li {
+  list-style: none;
+}
 
 a:link, a:visited {
     color: red;
