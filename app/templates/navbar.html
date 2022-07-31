@@ -13,10 +13,11 @@
             <a class="nav-link" href="/pokemon">Search</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/save_poke">Pokemon Party</a>
+            <a class="nav-link" href="/save_poke">Create Team</a>
           </li>
           {% if current_user.is_authenticated %}
-            <li class="nav-item"><a class="nav-link" href="/save_poke">Create Team</a></li>
+            <li class="nav-item"><a class="nav-link" href="/save_poke">Pokemon Party</a></li>
+            <li class="nav-item"><a class="nav-link" href="/edit">Edit Profile</a></li>
           {% else %}
 
           {% endif %}

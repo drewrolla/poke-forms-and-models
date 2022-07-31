@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Edit Profile:</h1>
+    <form class="container" method="POST">
+        {{ form.hidden_tag() }}
+
+        {{ form.email(class='form-control', placeholder='email', autocomplete='off') }}
+        {{ form.password(class='form-control', placeholder='password', autocomplete='off') }}
+        {{ form.confirm_password(class='form-control', placeholder='confirm password', autocomplete='off') }}
+        {{ form.submit(class='btn btn-success') }}
+    </form>
+
+{% endblock %}

@@ -30,6 +30,7 @@ class PokeTeam(db.Model):
     # foreign keys
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
+    # messed up order caused an ERROR AHHHHH
     def __init__(self, pokemon1, pokemon2, pokemon3, pokemon4, pokemon5, user_id):
         self.pokemon1 = pokemon1
         self.pokemon2 = pokemon2

@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 from .forms import LoginForm, UserCreationForm
 from app.models import User, db
 
@@ -23,12 +23,13 @@ def logMeIn():
             if user:
                 # compare passwords
                 if check_password_hash(user.password, password):
+                    flash('ARE YOU READY TO CATCH THEM ALL???', 'success')
                     login_user(user)
                 else:
-                    print('Incorrect password.')
+                    flash('Incorrect username or password.', 'danger')
             else:
                 # user doesn't exist
-                pass
+                flash('Account does not exist. Please sign up!', 'danger')
 
     return render_template('login.html', form=form)
 
@@ -58,9 +59,8 @@ def signMeUp():
             db.session.add(user)
             db.session.commit()
 
+            flash('Successfully signed up!', 'success')
             return redirect(url_for('auth.logMeIn'))
         else:
-            print('Validation failed.')
-    else:
-        print("GET request made.")
+            flash('Validation failed. Please try again.', 'danger')
     return render_template('signup.html', form=form)
