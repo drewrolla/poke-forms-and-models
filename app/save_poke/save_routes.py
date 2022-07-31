@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request
 from flask_login import current_user, login_required
-from app.models import PokeTeam, db
 from app.save_poke.forms import SavePokemon
+from app.models import PokeTeam, db
 
 save_poke = Blueprint('save_poke', __name__, template_folder='savetemplates')
 
@@ -24,10 +24,15 @@ def savedPokemon():
 
     return render_template('savePoke.html', form=form)
 
-@save_poke.route('/save_poke/show')
+@save_poke.route('/save_poke')
 def showSavedPokemon():
     team = PokeTeam.query.all() # might have to edit this to show user's specific Pokemon team
     return render_template('showSavedPoke.html', team=team)
+
+@save_poke.route('/save_poke/<int:team_id>')
+def showPokeTeam(team_id):
+    team = PokeTeam.query.get(team_id)
+    return render_template('pokemonteam.html', team=team)
 
 # unsure if I want to add this yet
 @save_poke.route('/save_poke/remove', methods=["GET", "POST"])

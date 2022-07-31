@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="card" style="width: 18rem;">
+        <img src="{{ team.img_url }}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{ team.name.title() }}</h5>
+            <strong>Ability: {{ team.ability }}</strong>
+            <li>HP: {{ team.hp }}</li>
+            <li>ATK: {{ team.attack }}</li>
+            <li>DEF: {{ team.defense }}</li>
+        </div>
+      </div>
+
+{% endblock %}

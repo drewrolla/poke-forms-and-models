@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 from .forms import LoginForm, UserCreationForm
-from app.models import User
+from app.models import User, db
 
 # import login functionality
 from flask_login import login_user, logout_user, login_required, current_user
@@ -8,9 +8,6 @@ from werkzeug.security import check_password_hash
 
 # create the Blueprint
 auth = Blueprint('auth', __name__, template_folder='authtemplates')
-
-# import models
-from app.models import db
 
 # routes 'n stuff
 @auth.route('/login', methods=["GET", "POST"])
@@ -40,7 +37,6 @@ def logMeIn():
 def logMeOut():
     logout_user()
     return redirect(url_for('auth.logMeIn'))
-
 
 
 @auth.route('/signup', methods=["GET", "POST"])
