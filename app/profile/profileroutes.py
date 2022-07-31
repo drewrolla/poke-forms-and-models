@@ -29,5 +29,5 @@ def edit():
             flash("Changes saved.", 'success')
             return redirect(url_for('auth.logMeIn'))
         else:
-            flash("Error making changes. Please try again.", 'danger')
+            flash("Error making changes. Please try again.", 'error')
     return render_template('edit.html', form=form)

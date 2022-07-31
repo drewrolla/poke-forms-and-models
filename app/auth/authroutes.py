@@ -26,16 +26,17 @@ def logMeIn():
                     flash('ARE YOU READY TO CATCH THEM ALL???', 'success')
                     login_user(user)
                 else:
-                    flash('Incorrect username or password.', 'danger')
+                    flash('Incorrect username or password.', 'error')
             else:
                 # user doesn't exist
-                flash('Account does not exist. Please sign up!', 'danger')
+                flash('Account does not exist. Please sign up!', 'error')
 
     return render_template('login.html', form=form)
 
 
 @auth.route('/logout')
 def logMeOut():
+    flash('Hasta la vista!', 'success')
     logout_user()
     return redirect(url_for('auth.logMeIn'))
 
@@ -59,8 +60,8 @@ def signMeUp():
             db.session.add(user)
             db.session.commit()
 
-            flash('Successfully signed up!', 'success')
+            flash('Account registered.', 'success')
             return redirect(url_for('auth.logMeIn'))
         else:
-            flash('Validation failed. Please try again.', 'danger')
+            flash('Validation failed. Please try again.', 'error')
     return render_template('signup.html', form=form)
