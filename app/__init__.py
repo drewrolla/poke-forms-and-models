@@ -7,8 +7,15 @@ from .poke.poke_routes import poke
 from .save_poke.save_routes import save_poke
 # was wondering why I got an error when trying to load the login/signup, just forgot to add it here
 from .auth.authroutes import auth
+from .models import User
 
 app = Flask(__name__)
+login = LoginManager()
+
+@login.user_loader
+def load_user(user_id):
+    return User.query.get(user_id)
+
 app.register_blueprint(poke)
 app.register_blueprint(save_poke)
 app.register_blueprint(auth)
@@ -21,6 +28,10 @@ from .models import db
 
 db.init_app(app)
 migrate = Migrate(app, db)
+login.init_app(app)
+
+# user must log in view this page
+login.login_view = 'auth.logMeIn'
 
 from . import routes
 from . import models

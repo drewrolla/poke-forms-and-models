@@ -2,8 +2,12 @@
 
 {% block content %}
     <h1>Log In:</h1>
-    <form method="POST">
 
+    <form class="container" method="POST" action="">
+        {{ form.hidden_tag() }}
+
+        {{ form.username(class='form-control', placeholder='username', autocomplete='off') }}
+        {{ form.password(class='form-control', placeholder='password', autocomplete='off') }}
+        {{ form.submit(class=' btn btn-danger') }}
     </form>
-
 {% endblock %}

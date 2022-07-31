@@ -2,7 +2,17 @@
 
 {% block content %}
 
-    <h1>Pokémon Party</h1>
+    <h1>Create Pokémon Party</h1>
+    <form class="container" method="POST" action="">
+        {{ form.hidden_tag() }}
+
+        {{ form.pokemon1(class='form-control', placeholder='Pokémon 1', autocomplete='off') }}
+        {{ form.pokemon2(class='form-control', placeholder='Pokémon 2', autocomplete='off') }}
+        {{ form.pokemon3(class='form-control', placeholder='Pokémon 3', autocomplete='off') }}
+        {{ form.pokemon4(class='form-control', placeholder='Pokémon 4', autocomplete='off') }}
+        {{ form.pokemon5(class='form-control', placeholder='Pokémon 5', autocomplete='off') }}
+        {{ form.submit(class=' btn btn-danger') }}
+    </form>
     <a href="/pokemon">Go back.</a>
 
 {% endblock %}

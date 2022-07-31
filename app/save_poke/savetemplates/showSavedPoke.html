@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% for t in team %} 
+    <!-- needs editing to work properly 
+    shouldn't be {{ pokemon.blahblah }}, should be {{ t.pokemon1 }}
+    issue is that pokemon1 doesn't have the info we want to pull from such as the name, stats, etc. -->
+    <div class="card" style="width: 18rem;">
+        <img src="{{ pokemon.img_url }}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{ pokemon.name.title() }}</h5>
+            <strong>Ability: {{ pokemon.ability }}</strong>
+            <li>HP: {{ pokemon.hp }}</li>
+            <li>ATK: {{ pokemon.attack }}</li>
+            <li>DEF: {{ pokemon.defense }}</li>
+        </div>
+      </div>
+    {% endfor %}
+{% endblock %}

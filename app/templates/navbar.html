@@ -15,15 +15,30 @@
           <li class="nav-item">
             <a class="nav-link" href="/save_poke">Pokemon Party</a>
           </li>
+          {% if current_user.is_authenticated %}
+            <li class="nav-item"><a class="nav-link" href="/save_poke">Create Team</a></li>
+          {% else %}
+
+          {% endif %}
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               More
             </a>
             <ul class="dropdown-menu">
+              {% if current_user.is_authenticated %}
+              <li><a class="dropdown-item" href="/logout">Log Out</a></li>
+              {% else %}
               <li><a class="dropdown-item" href="/login">Log In</a></li>
               <li><a class="dropdown-item" href="/signup">Sign Up</a></li>
-              <li><hr class="dropdown-divider"></li>
+              {% endif %}
             </ul>
+          </li>
+          <li class="nav-item">
+            {% if current_user.is_authenticated %}
+            <p class="nav-link active" >Welcome {{ current_user.username }}!</p>
+            {% else %}
+            <p class="nav-link active" >Welcome Pokémon Trainer!</p>
+            {% endif %}
           </li>
         </ul>
       </div>
