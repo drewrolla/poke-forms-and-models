@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1>Are you sure want to delete your account?</h1>
+    <h4>This cannot be undone!</h4>
+    <form class="deleted" method="post">
+        <input class=".btn" type="submit" value="YES">
+        <a href='/profile'>Cancel</a>
+    </form>
+
+{% endblock %}

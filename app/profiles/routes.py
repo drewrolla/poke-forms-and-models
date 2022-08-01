@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, url_for, request, redirect, flash
-from flask_login import current_user
+from flask_login import current_user, login_required
 from app.auth.forms import EditProfileForm
 from werkzeug.security import generate_password_hash
 
@@ -33,3 +33,16 @@ def editProfile():
         else:
             flash('Validation failed.', 'danger')
     return render_template('profile.html', form=form)
+
+
+@profile.route('/profile/delete', methods=["GET", "POST"])
+@login_required 
+def delProfile():
+    user = User.query.filter_by(id = current_user.id).first()
+    if request.method == "POST":
+        if user:
+            db.session.delete(user)
+            db.session.commit()
+            flash('Account successfully deleted.', 'success')
+            return redirect(url_for('auth.logMeIn'))
+    return render_template('delete.html')

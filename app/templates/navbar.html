@@ -24,6 +24,7 @@
             <ul class="dropdown-menu">
               {% if current_user.is_authenticated %}
               <li><a class="dropdown-item" href="/profile">Edit Account</a></li>
+              <li><a class="dropdown-item" href="/profile/delete">Delete Account</a></li>
               <li><a class="dropdown-item" href="/logout">Log Out</a></li>
               <li><a class="dropdown-item" href="#">Current Poké Roster</a></li>
               {% else %}
