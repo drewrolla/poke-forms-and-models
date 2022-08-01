@@ -19,7 +19,7 @@ def logMeIn():
             if user:
                 if check_password_hash(user.password, password):
                     login_user(user)
-                    return redirect(url_for('home'))
+                    return redirect(url_for('pokemon'))
                 else:
                     flash('Incorrect username or password.', 'error')
             else:
