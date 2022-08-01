@@ -28,7 +28,7 @@ def logMeIn():
 
 @auth.route('/logout')
 def logMeOut():
-    flash('See you later!', 'success')
+    flash("You've yee'd your last haw.", 'success')
     logout_user()
     return redirect(url_for('auth.logMeIn'))
 
@@ -53,44 +53,3 @@ def signMeUp():
         else:
             flash('Validation failed. Please try again.', 'error')
     return render_template('signup.html', form=form)
-
-# @auth.route('/editprofile', methods=["GET", "POST"])
-# def editprofile():
-#     form = EditProfileForm()
-#     if request.method == "POST":
-#         print('POST request made')
-#         if form.validate():
-#             username = form.username.data
-#             email = form.email.data
-#             password = form.password.data
-
-#             # add user to database
-#             user = User(username, email, password)
-
-#             db.session.commit()
-
-#             flash("Changes saved.", 'success')
-#             return redirect(url_for('auth.logMeIn'))
-#         else:
-#             flash("Error making changes. Please try again.", 'error')
-#     return render_template('editprofile.html', form=form)
-
-
-# @auth.route('/editprofile/<int:id>', methods=["GET", "POST"])
-# @login_required
-# def editProfile(id):
-#     form = EditProfileForm()
-#     user = User.query.get_or_404(id)
-#     if request.method == "POST":
-#         username = request.form['username']
-#         email = request.form['email']
-#         password = request.form['password']
-#         # db.update(User).values(to_update)
-#         user.updateUserInfo(username, email, password)
-#         user.saveUpdates()
-
-#         flash("User Updated", 'success')
-#         return redirect(url_for('index'))
-#     else:
-#         flash("Error occurred", 'danger')
-#         return render_template('editprofile.html', form=form, user=user)

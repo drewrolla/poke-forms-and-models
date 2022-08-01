@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, url_for, request, redirect, flash
 from flask_login import current_user
 from app.auth.forms import EditProfileForm
+from werkzeug.security import generate_password_hash
 
 profile = Blueprint('profile', __name__, template_folder='profiletemplates')
 
@@ -23,7 +24,7 @@ def editProfile():
             if email != "":
                 user.email = email
             if password != "":
-                user.password = password
+                user.password = generate_password_hash(password)
 
             db.session.add(user)
             db.session.commit()
