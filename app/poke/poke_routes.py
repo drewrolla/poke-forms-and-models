@@ -4,7 +4,6 @@ from .forms import PokemonSearchForm
 
 poke = Blueprint('poke', __name__, template_folder='poketemplates')
 
-
 @poke.route('/pokemon', methods=["GET", "POST"])
 def getPokemon():
     form = PokemonSearchForm()
@@ -30,4 +29,3 @@ def getPokemon():
 
 
     return render_template('pokemon.html', form=form, pokemon=my_dict)
-
