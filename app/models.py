@@ -19,6 +19,14 @@ class User(db.Model, UserMixin):
         self.email = email
         self.password = generate_password_hash(password)
 
+    def updateUserInfo(self, username, email, password):
+        self.username = username
+        self.email = email
+        self.password = generate_password_hash(password)
+
+    def saveUpdates(self):
+        db.session.commit()
+
 class PokeTeam(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     pokemon1 = db.Column(db.String(50), nullable=False)
