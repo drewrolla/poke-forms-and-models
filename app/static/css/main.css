@@ -17,6 +17,10 @@ div {
     margin-top: 1rem;
 }
 
+.deleteBtn {
+  margin: 1rem;
+}
+
 .navbar {
   background-color: rgb(32, 59, 96);
 }
@@ -31,11 +35,19 @@ h2 {
     color: black;
 }
 
+h4 {
+  color: black;
+}
+
 li {
   list-style: none;
 }
 
 .navbar a:hover {
+  color: yellow;
+}
+
+.deleted a:hover {
   color: yellow;
 }
 
