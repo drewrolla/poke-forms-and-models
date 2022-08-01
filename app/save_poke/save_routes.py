@@ -26,11 +26,6 @@ def savedPokemon():
             flash('Error saving team. Please try again!', 'error')
     return render_template('savePoke.html', form=form)
 
-# @save_poke.route('/save_poke')
-# def showSavedPokemon():
-#     team = PokeTeam.query.all() # might have to edit this to show user's specific Pokemon team
-#     return render_template('showSavedPoke.html', team=team)
-
 
 # Need to figure this portion out as well (aka show the saved team)
 @save_poke.route('/save_poke', methods=["GET", "POST"])

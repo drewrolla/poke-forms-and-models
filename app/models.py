@@ -4,14 +4,11 @@ from werkzeug.security import generate_password_hash
 
 db = SQLAlchemy()
 
-# based off ERD
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), nullable=False, unique=True)
     email = db.Column(db.String(150), nullable=False, unique=True)
     password = db.Column(db.String(300), nullable=False)
-    # I'm angry at myself b/c I figured out why my code wasn't working
-    # Put the wrong name in the PokeTeam spot in db.relationship()
     team = db.relationship("PokeTeam", backref="trainer", lazy=True)
 
     def __init__(self, username, email, password):
@@ -29,16 +26,13 @@ class User(db.Model, UserMixin):
 
 class PokeTeam(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    pokemon1 = db.Column(db.String(50), nullable=False)
-    pokemon2 = db.Column(db.String(50), nullable=False)
-    pokemon3 = db.Column(db.String(50), nullable=False)
-    pokemon4 = db.Column(db.String(50), nullable=False)
-    pokemon5 = db.Column(db.String(50), nullable=False)
+    pokemon1 = db.Column(db.String(50))
+    pokemon2 = db.Column(db.String(50))
+    pokemon3 = db.Column(db.String(50))
+    pokemon4 = db.Column(db.String(50))
+    pokemon5 = db.Column(db.String(50))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
-    # foreign keys
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-
-    # messed up order caused an ERROR AHHHHH
     def __init__(self, pokemon1, pokemon2, pokemon3, pokemon4, pokemon5, user_id):
         self.pokemon1 = pokemon1
         self.pokemon2 = pokemon2
