@@ -20,7 +20,9 @@
             <li>HP: {{ pokemon.hp }}</li>
             <li>ATK: {{ pokemon.attack }}</li>
             <li>DEF: {{ pokemon.defense }}</li>
-            <li class="redsubmit" method="POST" action="/save_poke">{{ form.save(class="btn btn-light") }}</li>
+            {% if current_user.is_authenticated %}
+              <li class="redsubmit" method="POST" action="/save_poke">{{ form.save(class="btn btn-success") }}</li>
+            {% endif %}
         </div>
       </div>
 

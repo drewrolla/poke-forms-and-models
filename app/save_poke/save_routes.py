@@ -3,9 +3,11 @@ from flask import Blueprint, redirect, render_template, request, url_for, flash
 from flask_login import current_user, login_required
 from app.save_poke.forms import SavePokemon
 from .forms import SavePokemon
-from app.models import PokeTeam, db
+from app.models import PokeTeam, db, User
+from app.poke.savePokemon import savePokemon
 
 save_poke = Blueprint('save_poke', __name__, template_folder='savetemplates')
+
 
 @save_poke.route('/save_poke', methods=["GET", "POST"])
 @login_required
@@ -30,30 +32,30 @@ def savedPokemon():
 
 
 # Need to figure this portion out as well (aka show the saved team)
+# does not show saved roster
 @save_poke.route('/roster', methods=["GET", "POST"])
 def showRoster():
-#     form = SavePokemon()
-#     roster = PokeTeam.query.all()
-#     my_dict = {}
-#     if request.method == "POST":
-#         print('Post request made.')
-#         if form.validate():
-#             poke_name = form.poke_name.data
-#             url = f"https://pokeapi.co/api/v2/pokemon/{poke_name}"
-#             res = requests.get(url)
-#             if res.ok:
-#                 data = res.json()
-#                 my_dict = {
-#                     'name': data['name'],
-#                     'ability': data['abilities'][0]['ability']['name'],
-#                     'img_url': data['sprites']['front_shiny'],
-#                     "hp": data['stats'][0]['base_stat'],
-#                     'attack': data['stats'][1]['base_stat'],
-#                     'defense': data['stats'][2]['base_stat']
-#                 }
-#     return render_template('roster.html', roster=roster, pokemon=my_dict)
-    return render_template('roster.html')
+    savedPokes = []
+    thing = []
+    form = SavePokemon()
+    roster = PokeTeam.query.all()
+    my_dict = {}
+    if request.method == "POST":
+        print('Post request made.')
+        if form.validate():
+            savePoke = form.pokemon1.data
+            saved = savePokemon(savePoke)
+            x = saved[0][savePoke]
+            pokemon1 = x['Name']
 
+            for poke in savedPokes:
+                saved = savePokemon(poke)
+                x = saved[0][poke]
+                savedPokes.append(x)
+            
+            thing = PokeTeam(pokemon1)
+
+    return render_template('roster.html', roster=roster, pokemon=my_dict, thing=thing, savedPokes=savedPokes)
 
 
 # unsure if I want to add this yet
@@ -79,3 +81,15 @@ def editRoster():
             db.session.commit()
         return redirect(url_for('save_poke.showRoster'))
     return render_template('savePoke.html', form=form, newRoster=newRoster)
+
+# @save_poke.routes('/savePokemon/<int:pokemon_id>')
+# @login_required
+# def savePokemon(pokemon_id):
+#     pokemon = PokeTeam.query.get(pokemon_id)
+#     current_user.follow(pokemon_id)
+#     return redirect(url_for('home'))
+
+# @save_poke.routes('/unsavePokemon/<int:pokemon_id>')
+# @login_required
+# def unsavePokemon(pokemon_id):
+#     pass

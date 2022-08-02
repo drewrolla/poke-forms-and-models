@@ -2,6 +2,7 @@ from flask import Flask
 from config import Config
 from flask_migrate import Migrate
 from flask_login import LoginManager
+from flask_moment import Moment
 
 from .poke.poke_routes import poke
 from .save_poke.save_routes import save_poke
@@ -12,6 +13,7 @@ from .models import User
 
 app = Flask(__name__)
 login = LoginManager()
+moment = Moment(app)
 
 @login.user_loader
 def load_user(user_id):

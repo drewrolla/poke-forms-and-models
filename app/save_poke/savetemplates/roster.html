@@ -5,20 +5,21 @@
     <h1>{{ current_user.username.title() }}'s Pokémon Roster</h1>
     {% endif %}
 
-    {% for r in roster %}
+    {% if savedPokes %}
+    {% for x in savedPokes %}
 
     <div class="card" style="width: 18rem;">
-        <img src="{{ pokemon.img_url }}" class="card-img-top" alt="...">
+        <img src="{{ x['front_shiny'] }}" class="card-img-top" alt="...">
         <div class="card-body">
-          <h5 class="card-title">{{ pokemon.name.title() }}</h5>
-            <strong>Ability: {{ pokemon.ability }}</strong>
-            <li>HP: {{ pokemon.hp }}</li>
-            <li>ATK: {{ pokemon.attack }}</li>
-            <li>DEF: {{ pokemon.defense }}</li>
-            <li class="redsubmit" method="POST" action="/save_poke">{{ form.save(class="btn btn-light") }}</li>
+          <h5 class="card-title">{{ x['name'].title() }}</h5>
+            <strong>Ability: {{ x['ability'] }}</strong>
+            <li>HP: {{ x['hp'] }}</li>
+            <li>ATK: {{ x['attack'] }}</li>
+            <li>DEF: {{ x['defense'] }}</li>
         </div>
       </div>
         
     {% endfor %}
+    {% endif %}
 
 {% endblock %}
