@@ -21,7 +21,8 @@
             <li>ATK: {{ pokemon.attack }}</li>
             <li>DEF: {{ pokemon.defense }}</li>
             {% if current_user.is_authenticated %}
-              <li class="redsubmit" method="POST" action="/save_poke">{{ form.save(class="btn btn-success") }}</li>
+              <a class="btn btn-success" href="{{ url_for('poke.catchPoke') }}">Catch</a>
+              <a class="btn btn-danger" href="{{ url_for('poke.releasePoke') }}">Run</a>
             {% endif %}
         </div>
       </div>

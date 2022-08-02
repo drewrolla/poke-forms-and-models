@@ -11,5 +11,15 @@ def home():
 @app.route('/pokemon')
 def pokemon():
     users = User.query.all()
+    caught = []
+    caught_set = set()
+    if current_user.is_authenticated:
+        caught = current_user.caughtPoke.all()
+        caught_set = {c.id for c in caught}
+    for u in users:
+        if u.id in caught_set:
+            u.flag=True
+
     
-    return render_template('pokemon.html', names=users) #names=users, following=following
+    
+    return render_template('pokemon.html', names=users)

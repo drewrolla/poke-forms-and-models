@@ -47,6 +47,14 @@ class User(db.Model, UserMixin):
     def saveUpdates(self):
         db.session.commit()
 
+    def catch(self, user):
+        self.caught.append(user)
+        db.session.commit()
+
+    def release(self, user):
+        self.caught.remove(user)
+        db.session.commit()
+
 class PokeTeam(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     pokemon1 = db.Column(db.String(50))

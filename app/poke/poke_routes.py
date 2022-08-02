@@ -1,6 +1,8 @@
+from flask_login import login_required, current_user
 import requests
 from flask import Blueprint, render_template, request, redirect, url_for
 from .forms import PokemonSearchForm
+from app.models import PokeTeam, db, User
 
 poke = Blueprint('poke', __name__, template_folder='poketemplates')
 
@@ -29,3 +31,18 @@ def getPokemon():
 
 
     return render_template('pokemon.html', form=form, pokemon=my_dict)
+
+@poke.route('/catch/<int:pokemon_id>')
+@login_required
+def catchPoke(pokemon_id):
+    user = User.query.get(pokemon_id)
+    current_user.catch(user)
+    return redirect(url_for('pokemon'))
+
+
+@poke.route('/release/<int:pokemon_id>')
+@login_required
+def releasePoke(pokemon_id):
+    user = User.query.get(pokemon_id)
+    current_user.release(user)
+    return redirect(url_for('pokemon'))
