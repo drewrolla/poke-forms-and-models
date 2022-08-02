@@ -27,8 +27,8 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(300), nullable=False)
     team = db.relationship("PokeTeam", backref="trainer", lazy=True)
     caught = db.relationship("User",
-        primaryjoin = (pokemon.c.caughtPoke_id==id),
-        secondaryjoin = (pokemon.c.pokemon_id==id),
+        primaryjoin = (pokemon.c.pokemon_id==id),
+        secondaryjoin = (pokemon.c.caughtPoke_id==id),
         secondary = pokemon,
         backref = db.backref('pokemon', lazy='dynamic'),
         lazy = 'dynamic'
@@ -56,7 +56,7 @@ class User(db.Model, UserMixin):
         db.session.commit()
 
     def showSavedPokemon(self):
-        saved = PokeTeam.query.join(pokemon, (PokeTeam.user_id==pokemon.c.caughtPoke_id)).filter(pokemon.c.caughtPoke_id==self.id))
+        saved = PokeTeam.query.join(pokemon, (PokeTeam.user_id==pokemon.c.caughtPoke_id)).filter(pokemon.c.pokemon_id==self.id)
         mine = PokeTeam.query.filter_by(user_id = self.id)
         all = saved.union(mine)
 
