@@ -81,15 +81,3 @@ def editRoster():
             db.session.commit()
         return redirect(url_for('save_poke.showRoster'))
     return render_template('savePoke.html', form=form, newRoster=newRoster)
-
-# @save_poke.routes('/savePokemon/<int:pokemon_id>')
-# @login_required
-# def savePokemon(pokemon_id):
-#     pokemon = PokeTeam.query.get(pokemon_id)
-#     current_user.follow(pokemon_id)
-#     return redirect(url_for('home'))
-
-# @save_poke.routes('/unsavePokemon/<int:pokemon_id>')
-# @login_required
-# def unsavePokemon(pokemon_id):
-#     pass

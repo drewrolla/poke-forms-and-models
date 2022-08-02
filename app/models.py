@@ -55,6 +55,11 @@ class User(db.Model, UserMixin):
         self.caught.remove(user)
         db.session.commit()
 
+    def showSavedPokemon(self):
+        saved = PokeTeam.query.join(pokemon, (PokeTeam.user_id==pokemon.c.caughtPoke_id)).filter(pokemon.c.caughtPoke_id==self.id))
+        mine = PokeTeam.query.filter_by(user_id = self.id)
+        all = saved.union(mine)
+
 class PokeTeam(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     pokemon1 = db.Column(db.String(50))
