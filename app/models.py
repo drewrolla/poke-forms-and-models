@@ -1,3 +1,4 @@
+from enum import unique
 from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash
@@ -14,7 +15,7 @@ db = SQLAlchemy()
 #     db.Column('follower_id', db.Integer, db.ForeignKey('user.id')),
 #     db.Column('followed_id', db.Integer, db.ForeignKey('user.id'))
 # )
-pokemon = db.Table('pokemon', 
+pokemans = db.Table('pokemon', 
     db.Column('pokemon_id', db.Integer, db.ForeignKey('user.id')),
     db.Column('caughtPoke_id', db.Integer, db.ForeignKey('user.id'))
 )
@@ -27,9 +28,9 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(300), nullable=False)
     team = db.relationship("PokeTeam", backref="trainer", lazy=True)
     caught = db.relationship("User",
-        primaryjoin = (pokemon.c.pokemon_id==id),
-        secondaryjoin = (pokemon.c.caughtPoke_id==id),
-        secondary = pokemon,
+        primaryjoin = (pokemans.c.pokemon_id==id),
+        secondaryjoin = (pokemans.c.caughtPoke_id==id),
+        secondary = pokemans,
         backref = db.backref('pokemon', lazy='dynamic'),
         lazy = 'dynamic'
     )
@@ -56,7 +57,7 @@ class User(db.Model, UserMixin):
         db.session.commit()
 
     def showSavedPokemon(self):
-        saved = PokeTeam.query.join(pokemon, (PokeTeam.user_id==pokemon.c.caughtPoke_id)).filter(pokemon.c.pokemon_id==self.id)
+        saved = PokeTeam.query.join(pokemans, (PokeTeam.user_id==pokemans.c.caughtPoke_id)).filter(pokemans.c.pokemon_id==self.id)
         mine = PokeTeam.query.filter_by(user_id = self.id)
         all = saved.union(mine)
 
@@ -77,4 +78,17 @@ class PokeTeam(db.Model):
         self.pokemon5 = pokemon5
         self.user_id = user_id
 
+class Pokedex(db.Model):
+    pokedex_id = db.Column(db.Integer, primary_key=True)
+    pokemon = db.Column(db.String(50), nullable=False, unique=True)
+    ability = db.Column(db.String(50), nullable=False)
+    hp = db.Column(db.Integer, nullable=False)
+    attack = db.Column(db.Integer, nullable=False)
+    defense = db.Column(db.Integer, nullable=False)
 
+    def __init__(self,pokemon, ability, img_url, hp, attack, defense):
+        self.pokemon = pokemon
+        self.ability = ability
+        self.hp = hp
+        self.attack = attack
+        self.defense = defense

@@ -19,7 +19,6 @@ def pokemon():
     for u in users:
         if u.id in caught_set:
             u.flag=True
-
     
     
     return render_template('pokemon.html', names=users)
